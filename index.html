@@ -156,22 +156,50 @@
     <section id="contact">
       <div class="flex-container" data-aos="fade-up">
         <div class="wrapper">
-          <form action="https://script.google.com/macros/s/AKfycbzIsR3fUsDFxqgNqW_BmRyasOJ1drSAjv3SMVlDlWdLWr2_R_QEBQ6_-FbeHiPrxMhzTg/exec" method="POST">
+          <div class="alert alert-success text-center d-none" role="alert"><b>Thank You</b> For Your Message</div>
+          <form name="message-avionic">
             <div class="form-group">
-              <script>
-                function resetForm(event) {
-                  document.getElementById("pesan").value = ""; // Mengatur ulang nilai input
-                }
-              </script>
               <label for="">Message</label>
-              <textarea name="" id="pesan" rows="5" placeholder="Type Your Message..."></textarea>
+              <textarea name="message" id="pesan" rows="5" placeholder="Type Your Message..."></textarea>
             </div>
             <div class="form-group1">
               <button type="submit" class="submit">Send Message</button>
+              <button class="button d-none" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+              </button>
             </div>
           </form>
         </div>
       </div>
+      <script>
+        const scriptURL = "https://script.google.com/macros/s/AKfycbx0N4L0nqy2hjbC4619gKLFo9TEdsTVm7PSWz31Z8BuZeWCpE0iEwOC-7nvhUZutpOy7g/exec";
+        const form = document.forms["message-avionic"];
+        const submit = document.querySelector(".submit");
+        const button = document.querySelector(".button");
+        const alert = document.querySelector(".alert");
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          //ketika submit diklik//
+          //tampilkan loading hilangkan kirim
+          button.classList.toggle("d-none");
+          submit.classList.toggle("d-none");
+
+          fetch(scriptURL, { method: "POST", body: new FormData(form) })
+            .then((response) => {
+              //tampilkan kirim hilangkan loading
+              button.classList.toggle("d-none");
+              submit.classList.toggle("d-none");
+              //tampilkan alert
+              alert.classList.toggle("d-none");
+              //reset form
+              form.reset();
+              console.log("Success!", response);
+            })
+            .catch((error) => console.error("Error!", error.message));
+        });
+      </script>
     </section>
 
     <!-- AOS -->

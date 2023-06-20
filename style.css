@@ -127,6 +127,7 @@ button {
   resize: vertical;
 }
 
+button,
 .submit {
   margin-left: auto;
   background: #1dbcfd;
