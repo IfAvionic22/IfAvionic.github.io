@@ -82,6 +82,9 @@
 }
 
 /**contac avionnic**/
+.message {
+  margin-bottom: 2rem;
+}
 .flex-container {
   display: flex;
   justify-content: center;
